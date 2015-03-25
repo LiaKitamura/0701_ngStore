@@ -5,11 +5,11 @@
 
 	app.controller('StoreController', function(){
 
-		this.products = gems;
+		this.products = products;
 
 	});
 
-	var gems = [{
+	var products = [{
 			name: 'Dodecahedron',
 			price: 2,
 			description: 'great Dodeca gem!',
