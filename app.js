@@ -33,6 +33,7 @@
 	});
 
 
+	// 1. First, we'll add a few reviews to our data source to play with. 
 	var products = [
 		{
 			name: 'Dodecahedron',
