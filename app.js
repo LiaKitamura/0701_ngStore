@@ -1,22 +1,17 @@
-// Wrap app in an anonymous function just as a good practice.
 (function(){
 
-	// angular.module( 'applicationName', [ dependencies, commaSeparated, list ])
 	var app = angular.module('store', []);
 
 
 	app.controller('StoreController', function(){
 
-		// 2. update 'products'
 		this.products = gems;
 
-		// 3. now go add your repeat directive
 	});
 
-	// 1. Add multiple gems
 	var gems = [{
 			name: 'Dodecahedron',
-			price: 2.95,
+			price: 2,
 			description: 'great Dodeca gem!',
 			canPurchase: true, 
 			soldOut: false,

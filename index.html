@@ -7,17 +7,25 @@
 </head>
 <body>
 	<div ng-controller="StoreController as store">
-		<!-- 4. add your repeat directive to show multiple gems -->
-		<div ng-repeat="product in store.products">
+		<!-- 1. add some better Bootstrap styling -->
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="product in store.products">
+				<h3>
+					{{product.name}}
 
-			<!-- 5. make sure to update your product references -->
-			<h1> {{product.name}} </h1>
-			<h2> {{product.price }} </h2>
-			<p> {{product.description}} </p>
-			<button ng-show="product.canPurchase"> Add to Cart </button>	
-			
-			<hr>
-		</div>
+					<!-- 2. add the currency filter in our price expression -->
+					<!-- note: the 'pipe' is used before filter (pipe = "send output into ...") -->
+					<!-- recipe for filters: {{ data | filter:options | nextFilter:options | ... }} -->
+					<em class="pull-right"> ${{product.price | currency }} </em>
+
+					<!-- other filters -->
+					<!-- UNIX timestamp to date: {{ '1388123412323' | date:'MM/dd/yyyy @ h:mma' }} // 12/27/2013 @ 12:50AM -->
+					<!-- uppercase/lowercase: {{ 'octogon gem' | uppercase }} // OCTOGON GEM -->
+					<!-- limitTo: <li ng-repeat="product in store.products | limitTo:3"> -->
+					<!-- orderBy: <li ng-repeat="product in store.products | orderBy:'-price' "> -->
+				</h3>
+			</li>
+		</ul>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 	<script src="app.js"></script>
