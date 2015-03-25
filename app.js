@@ -16,6 +16,10 @@
 		name: 'Dodecahedron',
 		price: 2.95,
 		description: 'great Dodeca gem!',
+		
+		// 2. we'll add our canPurchase Boolean to the gem.
+		canPurchase: true, // if this property didn't exist, Angular would assume it is false. That's what we call a 'falsey' value.
+		soldOut: true,
 	}
 
 })();

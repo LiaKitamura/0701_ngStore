@@ -6,16 +6,17 @@
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<!-- Here we connect the StoreController to the DOM -->
 	<div ng-controller="StoreController as store">
-		<!-- this div is now connected to the StoreController -->
-		<!-- the StoreController's scope is limited to INSIDE this div -->
-		<h1> {{store.product.name}} </h1>
-		<h2> {{store.product.price }} </h2>
-		<p> {{store.product.description}} </p>
+		<!-- 2. let's add another directive to HIDE the product when it is soldOut -->
+		<div ng-hide="store.product.soldOut">
+			<h1> {{store.product.name}} </h1>
+			<h2> {{store.product.price }} </h2>
+			<p> {{store.product.description}} </p>
+
+			<!-- 1. the ng-show directive looks at a Boolean value and makes the element visible on true and hidden on false -->
+			<button ng-show="store.product.canPurchase"> Add to Cart </button>	
+		</div>
 	</div>
-	<!-- This won't display, because it's outside of the StoreController's 'scope' -->
-	{{store.product.name}}
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 	<script src="app.js"></script>
 </body>
