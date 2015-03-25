@@ -14,13 +14,40 @@
 					{{product.name}}
 					<em class="pull-right"> {{product.price | currency }} </em>
 				</h3>
-				<!-- 2. Let's add our image to our display -->
-				<!-- note we can't use {{ product.images[0].full }} -->
-				<!-- <img src="{{ product.images[0].full }}"> -->
-				<!-- the DOM tries to load this before Angular has a chance to replace the expression value -->
-				<!-- we can use the ng-src directive to get the value we need -->
 				<img ng-src="{{ product.images[0].full }}" >
-				<!-- see: https://docs.angularjs.org/api/ng/directive/ngSrc -->
+
+
+				<!-- 5. Let's add our tabs here -->
+				<!-- 5.1 connect the controller using the ng-controller directive -->
+				<section class="tab" ng-controller="TabController as tab">
+
+					<!-- 5.2 add tab navigation here (.nav.nav-pills is a Bootstrap class for basic navigation) -->
+					<ul class="nav nav-pills">
+						<!-- 5.3 we can use the ng-class directive to dynamically add classes to our li. We'll set it to active if isSet() is equal to true. -->
+						<li ng-class="{active: tab.isSet(1)}">
+							<!-- 5.4 we'll use the ng-click directive to call our setTab() function when this link is clicked. -->
+							<a href ng-click="tab.setTab(1)">Description</a></li>
+						<li ng-class="{active: tab.isSet(2)}">
+							<a href ng-click="tab.setTab(2)">Specs</a></li>
+						<li ng-class="{active: tab.isSet(3)}">
+							<a href ng-click="tab.setTab(3)">Reviews</a></li>
+					</ul>
+
+					<!-- 5.5 now we can add our tab data. We'll determine which div to show based on which tab isSet() using ng-show directive -->
+					<div ng-show="tab.isSet(1)">
+						<h4>Description</h4>
+						<!-- 5.6 in each tab, we can display different product info. -->
+						<blockquote>{{ product.description }}</blockquote>
+					</div>
+					<div ng-show="tab.isSet(2)">
+						<h4>Specs</h4>
+						<blockquote>Shine: {{ product.shine }}</blockquote>
+					</div>
+						<div ng-show="tab.isSet(3)">
+						<h4>Reviews</h4>
+						<blockquote></blockquote>
+					</div>
+				</section>
 			</li>
 		</ul>
 	</div>

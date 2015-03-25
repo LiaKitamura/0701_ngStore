@@ -4,12 +4,31 @@
 
 
 	app.controller('StoreController', function(){
-
 		this.products = products;
-
 	});
-	// 1. Let's add images to our products
-	var products = [{
+	
+	// 1. Let's create a new controller to make Tabs that will show different product information (description, specs, reviews, etc.)
+	app.controller('TabController', function(){
+		
+		// 2. define the default tab
+		this.tab = 1;
+
+		// 3. create a function to set the tab.
+		this.setTab = function(setTab){
+			this.tab = setTab;
+		};
+
+		// 4. create a function that checks if a tab is set (it will return a boolean).
+		this.isSet = function(tab){
+			return tab===this.tab;
+		};
+
+		// 5. now go connect your tabs to the HTML
+	});
+
+
+	var products = [
+		{
 			name: 'Dodecahedron',
 			price: 2,
 			description: 'great Dodeca gem!',
@@ -48,7 +67,7 @@
 			}],
 			canPurchase: true, 
 			soldOut: false,
-		}]
-		// 2. now go add images to html
+		}
+		];
 
 })();
