@@ -12,18 +12,15 @@
 			<li class="list-group-item" ng-repeat="product in store.products">
 				<h3>
 					{{product.name}}
-
-					<!-- 2. add the currency filter in our price expression -->
-					<!-- note: the 'pipe' is used before filter (pipe = "send output into ...") -->
-					<!-- recipe for filters: {{ data | filter:options | nextFilter:options | ... }} -->
-					<em class="pull-right"> ${{product.price | currency }} </em>
-
-					<!-- other filters -->
-					<!-- UNIX timestamp to date: {{ '1388123412323' | date:'MM/dd/yyyy @ h:mma' }} // 12/27/2013 @ 12:50AM -->
-					<!-- uppercase/lowercase: {{ 'octogon gem' | uppercase }} // OCTOGON GEM -->
-					<!-- limitTo: <li ng-repeat="product in store.products | limitTo:3"> -->
-					<!-- orderBy: <li ng-repeat="product in store.products | orderBy:'-price' "> -->
+					<em class="pull-right"> {{product.price | currency }} </em>
 				</h3>
+				<!-- 2. Let's add our image to our display -->
+				<!-- note we can't use {{ product.images[0].full }} -->
+				<!-- <img src="{{ product.images[0].full }}"> -->
+				<!-- the DOM tries to load this before Angular has a chance to replace the expression value -->
+				<!-- we can use the ng-src directive to get the value we need -->
+				<img ng-src="{{ product.images[0].full }}" >
+				<!-- see: https://docs.angularjs.org/api/ng/directive/ngSrc -->
 			</li>
 		</ul>
 	</div>
