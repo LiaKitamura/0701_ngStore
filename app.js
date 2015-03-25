@@ -8,13 +8,13 @@
 	app.controller('StoreController', function(){
 
 		// 2. update 'products'
-		this.products = gems;
+		this.products = products;
 
 		// 3. now go add your repeat directive
 	});
 
-	// 1. Add multiple gems
-	var gems = [{
+	// 1. Add multiple products to our products array
+	var products = [{
 			name: 'Dodecahedron',
 			price: 2.95,
 			description: 'great Dodeca gem!',
