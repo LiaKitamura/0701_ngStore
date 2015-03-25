@@ -54,15 +54,11 @@
 							</li>													
 						</ul>
 
-						<!-- 2. We'll add our ReviewController here. Note: Ctrl is a common naming convention for 'Controller' -->
-						<!-- 4. Now we can add the action we want to run using the ng-submit directive, which runs when a form is submitted. -->
-						<!-- Note: we can pass in the current product with the keyword 'product', which is the current product in our store.products array from up above. -->
 						<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
 							<!--  Review Form -->
 							<h4>Submit a Review</h4>
 							<fieldset class="form-group">
 
-								<!-- 2.1 Make sure to update all your references to 'review' to use the review property in our 'reviewCtrl' -->
 								<select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars">
 									<option value="">Rate the Product</option>
 								</select>
@@ -83,7 +79,6 @@
 							<blockquote>
 								<h4>Preview your review:</h4>
 
-								<!-- 2.1 Make sure to update all your references to 'review' to use the review property in our 'reviewCtrl' -->
 								<strong>{{reviewCtrl.review.stars}} Stars</strong>
 								{{reviewCtrl.review.body}}
 								<cite class="clearfix">—{{reviewCtrl.review.author}} </cite>
