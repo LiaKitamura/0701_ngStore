@@ -7,25 +7,38 @@
 </head>
 <body>
 	<div ng-controller="StoreController as store">
-		<!-- 1. add some better Bootstrap styling -->
+
 		<ul class="list-group">
 			<li class="list-group-item" ng-repeat="product in store.products">
 				<h3>
 					{{product.name}}
 					<em class="pull-right"> {{product.price | currency }} </em>
 				</h3>
-				<img ng-src="{{ product.images[0].full }}" >
+
+				<!-- 4. We're going to replace the image with our gallery controller. -->
+				<!-- 4.1 first add the controller using a div with a directive -->
+				<!-- 4.2 let's make sure that the gallery only shows if there is an image property on our product using ng-show -->
+				<div ng-show="product.images.length" ng-controller="GalleryController as gallery">
+					<!-- 4.3 display our image using the ng-src directive. We can get the current image from our array using the gallery.current property we created in our GalleryController. -->
+					<img ng-src="{{ product.images[gallery.current].full }}"  width="330" />
+					
+					<!-- 4.4 Now we need to display our thumbnails to click on. Note: .list-inline.thumbs and .thumbnail are Bootstrap classes. -->
+					<ul class="list-inline thumbs">
+						<!-- 4.5 We can use the ng-repeat directive to repeat for all the images in the product.images array. -->
+						<li class="thumbnail" ng-repeat="image in product.images" ng-click="gallery.setCurrent($index)">
+							<!-- 4.6 Pull our thumbnail property out of the image. -->
+							<!-- 4.7 we need to change the .current image when an image is clicked using ng-click and the setCurrent function from our GalleryController. Use the Angular $index to get the current thumb index (see: https://docs.angularjs.org/api/ng/directive/ngRepeat) -->
+							<img ng-src="{{image.thumb}}"  width="100" />
+						</li>
+					</ul>
+					
+				</div>
+				<!-- <img ng-src="{{ product.images[0].full }}" > -->
 
 
-				<!-- 5. Let's add our tabs here -->
-				<!-- 5.1 connect the controller using the ng-controller directive -->
 				<section class="tab" ng-controller="TabController as tab">
-
-					<!-- 5.2 add tab navigation here (.nav.nav-pills is a Bootstrap class for basic navigation) -->
 					<ul class="nav nav-pills">
-						<!-- 5.3 we can use the ng-class directive to dynamically add classes to our li. We'll set it to active if isSet() is equal to true. -->
 						<li ng-class="{active: tab.isSet(1)}">
-							<!-- 5.4 we'll use the ng-click directive to call our setTab() function when this link is clicked. -->
 							<a href ng-click="tab.setTab(1)">Description</a></li>
 						<li ng-class="{active: tab.isSet(2)}">
 							<a href ng-click="tab.setTab(2)">Specs</a></li>
@@ -33,10 +46,8 @@
 							<a href ng-click="tab.setTab(3)">Reviews</a></li>
 					</ul>
 
-					<!-- 5.5 now we can add our tab data. We'll determine which div to show based on which tab isSet() using ng-show directive -->
 					<div ng-show="tab.isSet(1)">
 						<h4>Description</h4>
-						<!-- 5.6 in each tab, we can display different product info. -->
 						<blockquote>{{ product.description }}</blockquote>
 					</div>
 					<div ng-show="tab.isSet(2)">
@@ -50,6 +61,7 @@
 				</section>
 			</li>
 		</ul>
+
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 	<script src="app.js"></script>
