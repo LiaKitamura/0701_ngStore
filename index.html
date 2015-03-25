@@ -7,14 +7,16 @@
 </head>
 <body>
 	<div ng-controller="StoreController as store">
-		<!-- 2. let's add another directive to HIDE the product when it is soldOut -->
-		<div ng-hide="store.product.soldOut">
-			<h1> {{store.product.name}} </h1>
-			<h2> {{store.product.price }} </h2>
-			<p> {{store.product.description}} </p>
+		<!-- 4. add your repeat directive to show multiple gems -->
+		<div ng-repeat="product in store.products">
 
-			<!-- 1. the ng-show directive looks at a Boolean value and makes the element visible on true and hidden on false -->
-			<button ng-show="store.product.canPurchase"> Add to Cart </button>	
+			<!-- 5. make sure to update your product references -->
+			<h1> {{product.name}} </h1>
+			<h2> {{product.price }} </h2>
+			<p> {{product.description}} </p>
+			<button ng-show="product.canPurchase"> Add to Cart </button>	
+			
+			<hr>
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>

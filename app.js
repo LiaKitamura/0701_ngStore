@@ -4,22 +4,34 @@
 	// angular.module( 'applicationName', [ dependencies, commaSeparated, list ])
 	var app = angular.module('store', []);
 
-	// 1. add a controller to store the gem info
-	app.controller('StoreController', function(){
-		// 2. add the gem as a *property* of the StoreController
-		this.product = gem;
 
-		// 3. now go add the StoreController to the HTML
+	app.controller('StoreController', function(){
+
+		// 2. update 'products'
+		this.products = gems;
+
+		// 3. now go add your repeat directive
 	});
 
-	var gem = {
-		name: 'Dodecahedron',
-		price: 2.95,
-		description: 'great Dodeca gem!',
-		
-		// 2. we'll add our canPurchase Boolean to the gem.
-		canPurchase: true, // if this property didn't exist, Angular would assume it is false. That's what we call a 'falsey' value.
-		soldOut: true,
-	}
+	// 1. Add multiple gems
+	var gems = [{
+			name: 'Dodecahedron',
+			price: 2.95,
+			description: 'great Dodeca gem!',
+			canPurchase: true, 
+			soldOut: false,
+		},{
+			name: 'Pentagonal Gem',
+			price: 5.95,
+			description: 'great Pentagonal gem!',
+			canPurchase: false, 
+			soldOut: false,
+		},{
+			name: 'Diamond',
+			price: 10.95,
+			description: 'great Diamond gem!',
+			canPurchase: true, 
+			soldOut: false,
+		}]
 
 })();
