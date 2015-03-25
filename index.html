@@ -42,11 +42,9 @@
 						<h4>Specs</h4>
 						<blockquote>Shine: {{ product.shine }}</blockquote>
 					</div>
-						<div ng-show="tab.isSet(3)">
+					<div ng-show="tab.isSet(3)">
 						<h4>Reviews</h4>
-						<!-- 2.1 Let's create a list to display our current product reviews  -->
 						<ul>
-							<!-- 2.2 using ng-repeat again, we can 'iterate' through our reviews array. -->
 							<li ng-repeat="review in product.reviews">
 								<blockquote>
 									<strong> {{review.stars}} Stars </strong>
@@ -55,51 +53,40 @@
 								</blockquote>
 							</li>													
 						</ul>
-						<!-- 2.3 Now we'll build a form to submit new reviews  -->
-						<form name="reviewForm">
+
+						<!-- 2. We'll add our ReviewController here. Note: Ctrl is a common naming convention for 'Controller' -->
+						<!-- 4. Now we can add the action we want to run using the ng-submit directive, which runs when a form is submitted. -->
+						<!-- Note: we can pass in the current product with the keyword 'product', which is the current product in our store.products array from up above. -->
+						<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
 							<!--  Review Form -->
 							<h4>Submit a Review</h4>
 							<fieldset class="form-group">
-								<!-- 2.4: 	We'll use a select input for our Star rating. 
-									
-									2.4.1: 	We want to 'bind' this value to our scope so we can view it in the DOM. To do that, 
-											we can connect it to an ng-model directive. This places the value of the input onto 
-											our $scope for later use. 
 
-									2.4.2: 	We can use ng-options to dynamically create the options available 
-											ng-options=" [select] as [label] in [array]" 
-											(see: https://docs.angularjs.org/api/ng/directive/ngOptions 
-											OR example: http://jsfiddle.net/qWzTb/) 
-											-->
-								<select ng-model="review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars">
+								<!-- 2.1 Make sure to update all your references to 'review' to use the review property in our 'reviewCtrl' -->
+								<select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars">
 									<option value="">Rate the Product</option>
 								</select>
 							</fieldset>
 							<fieldset class="form-group">
-
-								<!-- 2.4.3 add a textarea for the review body. We'll bind it again using ng-model. -->
-								<textarea ng-model="review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
+								<textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
 							</fieldset>
 							
 							<fieldset class="form-group">
-							
-								<!-- 2.4.4 add an email field and bind using ng-model. -->
-								<input type="email" ng-model="review.author" class="form-control" placeholder="jimmyDean@example.org" title="Email" />
+								<input type="email" ng-model="reviewCtrl.review.author" class="form-control" placeholder="jimmyDean@example.org" title="Email" />
 							</fieldset>
 							
 							<fieldset class="form-group">
-							
-								<!-- 2.4.5 add a simple submit button. -->
 								<input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
 							</fieldset>
 
 							<!--  Live Preview -->
 							<blockquote>
 								<h4>Preview your review:</h4>
-								<!-- 2.5 Now we'll display our three bound values in a 'live preview' just by adding them in an expression. -->
-								<strong>{{review.stars}} Stars</strong>
-								{{review.body}}
-								<cite class="clearfix">—{{review.author}} </cite>
+
+								<!-- 2.1 Make sure to update all your references to 'review' to use the review property in our 'reviewCtrl' -->
+								<strong>{{reviewCtrl.review.stars}} Stars</strong>
+								{{reviewCtrl.review.body}}
+								<cite class="clearfix">—{{reviewCtrl.review.author}} </cite>
 							</blockquote>
 
 						</form>
