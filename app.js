@@ -19,17 +19,11 @@
 
 	});
 
-	// 1. Now let's create a Gallery controller that will control our thumbnails.
-	// This will be a lot like our TabController.
 	app.controller('GalleryController', function(){
-		// 2. let's store the value of the current image from the image array (remember, we're using an array so the first image index is 0).
 		this.current = 0;
-		// 3. create a function that will let us set the current photo (like we set the Tabs).
 		this.setCurrent = function(current){
 			this.current = current || 0;
 		};
-
-		// Now we can hook up our gallery in our HTML.
 	});
 
 
