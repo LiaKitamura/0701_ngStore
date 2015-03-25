@@ -14,27 +14,15 @@
 					{{product.name}}
 					<em class="pull-right"> {{product.price | currency }} </em>
 				</h3>
-
-				<!-- 4. We're going to replace the image with our gallery controller. -->
-				<!-- 4.1 first add the controller using a div with a directive -->
-				<!-- 4.2 let's make sure that the gallery only shows if there is an image property on our product using ng-show -->
 				<div ng-show="product.images.length" ng-controller="GalleryController as gallery">
-					<!-- 4.3 display our image using the ng-src directive. We can get the current image from our array using the gallery.current property we created in our GalleryController. -->
 					<img ng-src="{{ product.images[gallery.current].full }}"  width="330" />
-					
-					<!-- 4.4 Now we need to display our thumbnails to click on. Note: .list-inline.thumbs and .thumbnail are Bootstrap classes. -->
 					<ul class="list-inline thumbs">
-						<!-- 4.5 We can use the ng-repeat directive to repeat for all the images in the product.images array. -->
 						<li class="thumbnail" ng-repeat="image in product.images" ng-click="gallery.setCurrent($index)">
-							<!-- 4.6 Pull our thumbnail property out of the image. -->
-							<!-- 4.7 we need to change the .current image when an image is clicked using ng-click and the setCurrent function from our GalleryController. Use the Angular $index to get the current thumb index (see: https://docs.angularjs.org/api/ng/directive/ngRepeat) -->
 							<img ng-src="{{image.thumb}}"  width="100" />
 						</li>
 					</ul>
 					
 				</div>
-				<!-- <img ng-src="{{ product.images[0].full }}" > -->
-
 
 				<section class="tab" ng-controller="TabController as tab">
 					<ul class="nav nav-pills">
@@ -56,7 +44,66 @@
 					</div>
 						<div ng-show="tab.isSet(3)">
 						<h4>Reviews</h4>
-						<blockquote></blockquote>
+						<!-- 2.1 Let's create a list to display our current product reviews  -->
+						<ul>
+							<!-- 2.2 using ng-repeat again, we can 'iterate' through our reviews array. -->
+							<li ng-repeat="review in product.reviews">
+								<blockquote>
+									<strong> {{review.stars}} Stars </strong>
+									{{review.body}}
+									<cite class="clearfix">—{{review.author}}</cite>
+								</blockquote>
+							</li>													
+						</ul>
+						<!-- 2.3 Now we'll build a form to submit new reviews  -->
+						<form name="reviewForm">
+							<!--  Review Form -->
+							<h4>Submit a Review</h4>
+							<fieldset class="form-group">
+								<!-- 2.4: 	We'll use a select input for our Star rating. 
+									
+									2.4.1: 	We want to 'bind' this value to our scope so we can view it in the DOM. To do that, 
+											we can connect it to an ng-model directive. This places the value of the input onto 
+											our $scope for later use. 
+
+									2.4.2: 	We can use ng-options to dynamically create the options available 
+											ng-options=" [select] as [label] in [array]" 
+											(see: https://docs.angularjs.org/api/ng/directive/ngOptions 
+											OR example: http://jsfiddle.net/qWzTb/) 
+											-->
+								<select ng-model="review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars">
+									<option value="">Rate the Product</option>
+								</select>
+							</fieldset>
+							<fieldset class="form-group">
+
+								<!-- 2.4.3 add a textarea for the review body. We'll bind it again using ng-model. -->
+								<textarea ng-model="review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
+							</fieldset>
+							
+							<fieldset class="form-group">
+							
+								<!-- 2.4.4 add an email field and bind using ng-model. -->
+								<input type="email" ng-model="review.author" class="form-control" placeholder="jimmyDean@example.org" title="Email" />
+							</fieldset>
+							
+							<fieldset class="form-group">
+							
+								<!-- 2.4.5 add a simple submit button. -->
+								<input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+							</fieldset>
+
+							<!--  Live Preview -->
+							<blockquote>
+								<h4>Preview your review:</h4>
+								<!-- 2.5 Now we'll display our three bound values in a 'live preview' just by adding them in an expression. -->
+								<strong>{{review.stars}} Stars</strong>
+								{{review.body}}
+								<cite class="clearfix">—{{review.author}} </cite>
+							</blockquote>
+
+						</form>
+
 					</div>
 				</section>
 			</li>
