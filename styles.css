@@ -1,0 +1,18 @@
+
+/* 2.1 As we type in the form, Angular continually checks the data to see if it's valid. 
+ * It also adds classes to the elements as flags of the current state. We can use those 
+ * flags to style the form inputs.
+ *
+ * Note: the .ng-dirty class is added when the user starts typing. It is a flag that something has been
+ * added to the field.
+ */
+
+ /* 2.1.1 first we'll add a red border when the form is INVALID. */
+.ng-dirty.ng-invalid:not(form){
+	border: 1px solid red;
+}
+
+/* 2.1.2 next we'll add a green border when the form is VALID. */
+.ng-dirty.ng-valid:not(form){
+	border: 1px solid green;
+}
