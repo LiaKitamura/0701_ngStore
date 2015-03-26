@@ -2,6 +2,7 @@
 (function(){
 
 	// angular.module( 'applicationName', [ dependencies, commaSeparated, list ])
+	// goes with ng-app directive in the html called store
 	var app = angular.module('store', []);
 
 	// 1. add a controller to store the product info
